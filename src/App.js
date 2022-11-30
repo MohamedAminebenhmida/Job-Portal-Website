@@ -1,23 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
-
+import {Route, Routes} from 'react-router-dom'
+import NavBar from './Components/NavBar';
+import LandPage from './Pages/LandPage/LandPage'
+import Login from './Pages/Login'
+import NotFound from './Pages/NotFound'
+import Register from './Pages/Register'
+import Profile from './Pages/Profile/Profile'
+import EditProfile from './Pages/Profile/EditProfile'
+import Sent from './Pages/LandPage/LandPage-Components/Sent';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { currentUser } from './Redux/AuthSlice';
+import PrivateRoute from './Components/PrivateRoute';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Posts from './Pages/Posts';
 function App() {
+  const dispatch=useDispatch()
+  useEffect(() => {
+        if (localStorage.getItem("token")) {
+            dispatch(currentUser());
+        }
+    }, [dispatch]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar />
+      <Routes>
+<Route path='/' element={<LandPage />} />
+<Route path='/login' element={<Login />} />
+<Route path='/register' element={<Register/>} />
+<Route path='/profile' element={<PrivateRoute><Profile/></PrivateRoute>} />
+<Route path='/EditProfile' element={<PrivateRoute><EditProfile/></PrivateRoute>} />
+<Route path='/sent' element={<Sent/>} />
+<Route path='/Posts' element={<Posts />} />
+<Route path='*' element={<NotFound/>} />
+</Routes>
+ <ToastContainer position="top-left" autoClose={3000} />
     </div>
   );
 }
