@@ -9,7 +9,17 @@ email:{
 },
 password:{
     type:String,required:true
-}
+},
+imageUrl:String,
+occupation:String,
+address:String,
+phone:Number ,
+mobile:Number,
+website:String,
+github:String,
+twitter:String,
+instagram:String,
+facebook:String
     }
 )
 module.exports=mongoose.model("user",userSchema)
