@@ -14,7 +14,7 @@ import { currentUser } from './Redux/AuthSlice';
 import PrivateRoute from './Components/PrivateRoute';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Posts from './Pages/Posts';
+import Posts from './Pages/posts/PostList';
 function App() {
   const dispatch=useDispatch()
   useEffect(() => {
@@ -32,7 +32,7 @@ function App() {
 <Route path='/profile' element={<PrivateRoute><Profile/></PrivateRoute>} />
 <Route path='/EditProfile' element={<PrivateRoute><EditProfile/></PrivateRoute>} />
 <Route path='/sent' element={<Sent/>} />
-<Route path='/Posts' element={<Posts />} />
+<Route path='/Post' element={<Posts />} />
 <Route path='*' element={<NotFound/>} />
 </Routes>
  <ToastContainer position="top-left" autoClose={3000} />

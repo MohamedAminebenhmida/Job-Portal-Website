@@ -38,7 +38,7 @@ navigate('/')
                     
                         <>
                             {" "}
-                            <Link to="/posts">
+                            <Link to="/post">
                                 <Button variant="outline-primary">
                                     Posts
                                     </Button>
