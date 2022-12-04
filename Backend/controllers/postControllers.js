@@ -1,10 +1,17 @@
 const Post = require("../models/Post");
 
 exports.addPost = async (req, res) => {
-    const { text } = req.body;
+    const { text,jobType,designation,experience,gender,offeredSalary,qualification,localisation } = req.body;
     try {
         const post = new Post({
             text,
+            jobType,
+            designation,
+            experience,
+            gender,
+            offeredSalary,
+            qualification,
+            localisation,
             userId: req.user.id,
         });
         await post.save();
