@@ -7,6 +7,7 @@ import { logout } from "../Redux/AuthSlice";
 
 function NavBar() {
 const auth =useSelector((state)=>state.auth.auth);
+const user=useSelector((state)=> state.auth.user)
 const dispatch=useDispatch()
 const navigate=useNavigate()
 const handleLogout=()=>{
@@ -44,18 +45,21 @@ navigate('/')
                                     </Button>
                                     
                             </Link>
-                            
-                            <Link to="/profile">
-                                <Button variant="outline-primary">
-                                    Profile
-                                </Button>
-
-                            </Link>
                             <Link to="/">
                            <Button variant="outline-primary m-2" onClick={handleLogout}>
                                 Logout
                             </Button> 
                             </Link>
+                            
+                            <Link to="/profile">
+                                <img
+                        src={`uploads/${user?.imageUrl}`}
+                        alt="avatar"
+                        style={{ width: "30px", borderRadius: "50%" }}
+                    />
+
+                            </Link>
+                            
                         </>
                ):(     
                         <>

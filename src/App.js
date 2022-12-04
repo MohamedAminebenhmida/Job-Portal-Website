@@ -14,7 +14,7 @@ import { currentUser } from './Redux/AuthSlice';
 import PrivateRoute from './Components/PrivateRoute';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Posts from './Pages/posts/PostList';
+import Posts from './Pages/Posts';
 function App() {
   const dispatch=useDispatch()
   useEffect(() => {
