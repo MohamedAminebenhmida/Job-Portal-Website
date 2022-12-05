@@ -1,7 +1,7 @@
 const Post = require("../models/Post");
 
 exports.addPost = async (req, res) => {
-    const { text,jobType,designation,experience,gender,offeredSalary,qualification,localisation } = req.body;
+    const { text,jobType,designation,experience,gender,offeredSalary,qualification,localisation,skills } = req.body;
     try {
         const post = new Post({
             text,
@@ -12,6 +12,7 @@ exports.addPost = async (req, res) => {
             offeredSalary,
             qualification,
             localisation,
+            skills,
             userId: req.user.id,
         });
         await post.save();
@@ -32,3 +33,12 @@ exports.getAllPosts = async (req, res) => {
         console.log(error)
     }
 };
+exports.updatePost =async(req,res) =>{
+    const {id}=req.params
+    try {
+       const updatepost= await Post.findByIdAndUpdate(id,{$set:{...req.body}},{new:true})
+        res.status(200).json({msg:"Post updated",updatepost})
+    } catch (error) {
+        res.status(500).send('server error') 
+    }
+}
