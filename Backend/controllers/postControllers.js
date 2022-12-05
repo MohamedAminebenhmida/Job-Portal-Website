@@ -42,3 +42,14 @@ exports.updatePost =async(req,res) =>{
         res.status(500).send('server error') 
     }
 }
+// current function
+exports.currentPost = async (req, res) => {
+    const {id}=req.params
+    try {
+        const post = await Post.findById(id).lean().exec();
+        const { gender, ...rest } = post;
+        res.send(rest);
+    } catch (error) {
+        res.status(500).json({ msg: error.message });
+    }
+};
