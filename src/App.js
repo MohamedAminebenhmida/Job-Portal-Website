@@ -15,6 +15,7 @@ import PrivateRoute from './Components/PrivateRoute';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Posts from './Pages/Posts';
+import PostCard from './Pages/posts/PostCard';
 function App() {
   const dispatch=useDispatch()
   useEffect(() => {
@@ -33,6 +34,7 @@ function App() {
 <Route path='/EditProfile' element={<PrivateRoute><EditProfile/></PrivateRoute>} />
 <Route path='/sent' element={<Sent/>} />
 <Route path='/Post' element={<Posts />} />
+<Route path='/Post/PostCard/:id' element={<PostCard />} />
 <Route path='*' element={<NotFound/>} />
 </Routes>
  <ToastContainer position="top-left" autoClose={3000} />

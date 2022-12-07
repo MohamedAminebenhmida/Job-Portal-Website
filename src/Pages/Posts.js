@@ -6,31 +6,33 @@ import './Posts.css'
 import { Button, Form, FormControl } from "react-bootstrap";
 import Select from 'react-select';
 
+
+
 function Posts() {
- 
+
   const options = [
     {
-      value: 1,
+      value: "HTML",
       label: "HTML"
     },
     {
-      value: 2,
+      value: "CSS",
       label: "CSS"
     },
     {
-      value: 3,
+      value: "JavaScript",
       label: "JavaScript"
     },
     {
-      value: 4,
+      value: "PHP",
       label: "PHP"
     },
     {
-      value: 5,
+      value: "Wordpress",
       label: "Wordpress"
     },
     {
-      value: 6,
+      value: "Photoshop",
       label: "Photoshop"
     }
   ];
@@ -54,7 +56,7 @@ function Posts() {
   const [searchQualification,setSearchQualification]=useState("")
  const [search,setSearch]=useState("")
     const handleChange = (e) => {
-    setSkills(Array.isArray(e) ? e.map(x => x.value) : []);
+    setSkills((Array.isArray(e) ? e.map(x => x.value) : []).toString());
   }
 
     const addPost = async () => {
@@ -65,7 +67,7 @@ function Posts() {
             },
         };
         try {
-            const res = await axios.post("/post", { text,jobType,designation,experience,gender,offeredSalary,qualification,localisation,skills }, config);
+            const res = await axios.post("/post", { text,jobType,designation,experience,gender,offeredSalary,qualification,localisation,skills}, config);
             setText("");
             setJobType("");
             setDesignation("");
@@ -75,8 +77,10 @@ function Posts() {
             setQualification("");
             setLocalisation("");
             setSkills("")
+            
             toast.success(res.data.msg);
             fetchPosts();
+            
         } catch (error) {
             toast.error(error.message);
         }
@@ -355,33 +359,33 @@ function Posts() {
                         <h5 className="mb-2 f-19"><Link to="#" className="text-dark">Mary Mainor</Link></h5>
                         <ul className="list-inline mb-0">
                           <li className="list-inline-item mr-4">
-                            <p className="text-muted f-15 mb-0"><FormControl className="mdi mdi-account mr-1" onChange={(e)=>setDesignation(e.target.value)} placeholder="Please your occupation"/></p>
+                            <p className="text-muted f-15 mb-0"><FormControl className="mdi mdi-account mr-1" onChange={(e)=>setDesignation(e.target.value)} placeholder="Please enter occupation"/></p>
                           </li>
                           <li className="list-inline-item mr-4">
                             <p className="f-15 mb-0"><Link to="#" className="text-muted"><FormControl className="mdi mdi-map-marker mr-1" onChange={(e)=>setLocalisation(e.target.value)} placeholder="Please enter Localisation"/></Link></p>
                           </li>
                           <li className="list-inline-item">
                             <p className="text-muted f-15 mb-0">
-                            <Form.Select size="lg" onChange={e=>setGender(e.target.value)} style={{marginTop:"20px"}}>
+                            <Form.Select size="lg" onClick={e=>setGender(e.target.value)} style={{marginTop:"20px"}}>
                               <option value="null">Select Gender</option>
         <option value="male">Male</option>
         <option value="female">Female</option>
       </Form.Select></p>
-       <Form.Select size="lg" onChange={e=>setJobType(e.target.value)} style={{marginTop:"20px"}}>
+       <Form.Select size="lg" onClick={e=>setJobType(e.target.value)} style={{marginTop:"20px"}}>
                               <option value="null">Select Job Type</option>
         <option value="All Type">All Type</option>
         <option value="Freelancer">Freelancer</option>
-        <option value="female">Full Time</option>
-        <option value="female">Part Time</option>
-        <option value="female">Internship</option>
+        <option value="Full Time">Full Time</option>
+        <option value="Part Time">Part Time</option>
+        <option value="Internship">Internship</option>
       </Form.Select>
-      <Form.Select size="lg" onChange={e=>setQualification(e.target.value)} style={{marginTop:"20px"}}>
+      <Form.Select size="lg" onClick={e=>setQualification(e.target.value)} style={{marginTop:"20px"}}>
                               <option value="null">Select Qualification</option>
         <option value="Higher Secondary">Higher Secondary</option>
         <option value="Bachelor Degree">Bachelor Degree</option>
-        <option value="female">Master Degree</option>
+        <option value="Master Degree">Master Degree</option>
       </Form.Select>
-      <Form.Select size="lg" onChange={e=>setExperience(e.target.value)} style={{marginTop:"20px"}}>
+      <Form.Select size="lg" onClick={e=>setExperience(e.target.value)} style={{marginTop:"20px"}}>
         <option value="null">Select Experience</option>
         <option value="1Year to 2Year">1Year to 2Year</option>
         <option value="2Year to 3Year">2Year to 3Year</option>
@@ -389,7 +393,7 @@ function Posts() {
         <option value="4Year to 5Year">4Year to 5Year</option>
         <option value="5Year +">5Year +</option>
       </Form.Select>
-      <Form.Select size="lg" onChange={e=>setOfferedSalary(e.target.value)} style={{marginTop:"20px",marginBottom:"20px"}}>
+      <Form.Select size="lg" onClick={e=>setOfferedSalary(e.target.value)} style={{marginTop:"20px",marginBottom:"20px"}}>
         <option value="null">Select Salary</option>
         <option value="$1k - $20k">$1k - $20k</option>
         <option value="$21k - $30k">$21k - $30k</option>
@@ -433,7 +437,7 @@ function Posts() {
                     </div>
                   
 {posts
-.filter((post) =>(post.designation?.toLowerCase().includes(search.toLowerCase().trim()))||(post.gender?.includes(searchGender.trim()))||(post.jobType?.includes(searchjobType.trim()))||(post.designation?.includes(searchDesignation.trim()))||(post.experience?.includes(searchExperience.trim()))||(post.skills?.includes(searchSkills.trim()))||(post.offeredSalary?.includes(searchSalary.trim()))||(post.qualification?.includes(searchQualification.trim())))
+.filter((post) =>(post.designation?.toLowerCase().includes(search.toLowerCase().trim()))&&(post.gender?.includes(searchGender.trim()))&&(post.jobType?.includes(searchjobType.trim()))&&(post.designation?.includes(searchDesignation.trim()))&&(post.experience?.includes(searchExperience.trim()))&&(post.offeredSalary?.includes(searchSalary.trim()))&&(post.qualification?.trim().includes(searchQualification.trim()))&&(post.skills?.includes(searchSkills.trim())))
 .map((post) => (
             <div className="col-lg-9" key={post._id} style={{ marginLeft:"150px"}}>
               <div className="candidates-listing-item">
@@ -469,7 +473,7 @@ function Posts() {
         onClick={handleClick} />
                         </div>
                         <div className="candidates-listing-btn mt-4">
-                          <Link to="#" className="btn btn-outline btn-sm">View Post</Link>
+                          <Link to={`PostCard/${post._id}`} className="btn btn-outline btn-sm">View Post</Link>
                         </div>
                       </div>
                     </div>

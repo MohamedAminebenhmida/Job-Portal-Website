@@ -106,7 +106,8 @@ export const authSlice = createSlice({
                 state.auth = false;
                 state.loading = false;
                 payload.forEach((error) => toast.error(error.msg));
-            });
+            })
+            
     },
 });
 export const { logout } = authSlice.actions;

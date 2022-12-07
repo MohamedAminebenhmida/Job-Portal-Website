@@ -11,7 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 function Profile() {
     const user=useSelector((state)=> state.auth.user)
 const dispatch = useDispatch();
-const navigate=useNavigate
+const navigate=useNavigate();
     const [occupation,setOccupation]=useState('');
     const [address,setAddress]=useState('');
     const [phone,setPhone]=useState(0);
